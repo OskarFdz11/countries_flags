@@ -5,6 +5,7 @@ import LoadingIndicator from "@/src/components/atoms/LoadingIndicator";
 import _ from "lodash";
 import SearchBarComponent from "@/src/components/atoms/SearchBarComponent/SearchBarComponent";
 import useCountriesSearch from "@/src/lib/hooks/useCountriesSearch";
+import { styles } from "./CountriesList.styles";
 
 interface ICountryListProps {}
 
@@ -16,7 +17,7 @@ const CountriesList: FC<ICountryListProps> = ({}) => {
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.container}>
       <SearchBarComponent
         onChangeText={(text) => {
           setSearch(text);
@@ -27,9 +28,7 @@ const CountriesList: FC<ICountryListProps> = ({}) => {
       {loading ? (
         <LoadingIndicator />
       ) : countries.length === 0 ? (
-        <Text style={{ textAlign: "center", marginTop: 20 }}>
-          "No hay resultados"
-        </Text>
+        <Text style={styles.noResultsText}>"No hay resultados"</Text>
       ) : (
         <FlatListCountries countries={countries} />
       )}
