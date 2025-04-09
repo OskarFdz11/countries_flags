@@ -1,21 +1,29 @@
 import React, { FC } from "react";
-import { FlatList, ListRenderItem, View } from "react-native";
+import { FlatList, ListRenderItem, TouchableOpacity, View } from "react-native";
 import CountryCard from "../atoms/CountryCard";
-import { CountryCardProps } from "@/src/lib/types/types";
+import { CountryCardProps, ID } from "@/src/lib/types/types";
 
 import { styles } from "./FlatlistCountries.styles";
 
 interface FlatListCountriesProps {
   countries: CountryCardProps[];
+  onSelectCountry: (code: ID) => void;
   onEndReached?: () => void;
 }
 
 const FlatListCountries: FC<FlatListCountriesProps> = ({
   countries,
   onEndReached,
+  onSelectCountry,
 }) => {
-  const renderItem: ListRenderItem<CountryCardProps> = ({ item }) => (
-    <CountryCard name={item.name} code={item.code} emoji={item.emoji} />
+  const renderItem: ListRenderItem<CountryCardProps> = ({
+    item,
+  }: {
+    item: CountryCardProps;
+  }) => (
+    <TouchableOpacity onPress={() => item.code && onSelectCountry(item.code)}>
+      <CountryCard name={item.name} code={item.code} emoji={item.emoji} />
+    </TouchableOpacity>
   );
   return (
     <View style={styles.container}>

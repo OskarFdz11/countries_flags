@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import { SearchBar } from "@rneui/themed";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { styles } from "./SearchBarComponent.styles";
 
@@ -15,23 +15,19 @@ const SearchBarComponent: FC<SearchBarProps> = ({
   value,
   placeholder,
 }) => {
-  // const [search, setSearch] = useState("");
-
-  // const updateSearch = (search: string) => {
-  //   setSearch(search);
-  // };
-
   return (
     <View style={styles.container}>
-      <SearchBar
-        placeholder={placeholder || "Search"}
-        onChangeText={onChangeText}
-        value={value}
-        platform="default"
-        containerStyle={styles.containerStyle}
-        inputContainerStyle={styles.inputContainerStyle}
-        inputStyle={{}}
-      />
+      <ScrollView>
+        <SearchBar
+          placeholder={placeholder || "Search"}
+          onChangeText={onChangeText}
+          value={value}
+          platform="default"
+          containerStyle={styles.containerStyle}
+          inputContainerStyle={styles.inputContainerStyle}
+          inputStyle={{}}
+        />
+      </ScrollView>
     </View>
   );
 };
